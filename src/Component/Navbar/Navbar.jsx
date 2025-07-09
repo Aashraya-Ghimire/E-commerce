@@ -12,7 +12,7 @@ function Navbar() {
       <div className="flex justify-between items-center h-[70px]">
         <div className="w-16">
           <img
-            src="./logo.png"
+            src="/logo.png"
             alt="Logo"
             className="w-full h-auto object-contain"
           />

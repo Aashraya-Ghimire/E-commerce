@@ -28,7 +28,7 @@ const Popular = () => {
           </div>
         </div>
        
-        <div><Items/></div>
+        <div className="h-80 overflow-scroll"><Items/></div>
       </div>
     </div>
   );
