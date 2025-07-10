@@ -1,28 +1,36 @@
-import { React, useEffect, useState } from "react";
-import { IoMdStar } from "react-icons/io";
+import React, { useEffect, useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Button from "../Button/Button";
 import { IoStarOutline } from "react-icons/io5";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import productDataApi from "../Api/productData.api";
+import Productinfo from "../Product/Modal/Productinfo";
 
 function Items() {
   const [likedItems, setLikedItems] = useState({});
-
+  const [showModal, setShowModal] = useState(false);
   const [productData, setProductData] = useState([]);
+  const [selectedData, setSelectedData] = useState(null);
+
   useEffect(() => {
     productDataApi(setProductData);
-  });
-  console.log("product data from product", productData);
+  }, []);
+
+  const openModal = (id) => {
+    const selected = productData.find((item) => item.id === id);
+    setSelectedData(selected);
+    setShowModal(true);
+  };
 
   return (
-    <div>
-      <div className="flex flex-wrap gap-6 justify-center p-6 bg-white rounded-3xl">
+    <div className="relative flex justify-center items-center">
+      <div className="flex flex-wrap gap-6 justify-center p-6 bg-white rounded-3xl w-[85vw]">
         {productData.map((item, i) => (
           <div
             key={i}
-            className="w-full sm:w-[48%] lg:w-[22%] bg-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-gray-400 transition duration-300"
+            onClick={() => openModal(item?.id)}
+            className="w-40 sm:w-[49%] lg:w-[25%] bg-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-gray-400 transition duration-300 cursor-pointer"
           >
             <div className="relative flex justify-end">
               <img
@@ -30,7 +38,7 @@ function Items() {
                 alt={item?.name}
                 className="h-40 w-full object-cover"
               />
-              <div className="absolute top-2 right-2 cursor-pointer">
+              <div className="absolute top-2 right-2 cursor-pointer z-10">
                 {likedItems[item.id] ? (
                   <FaHeart
                     className="text-red-500"
@@ -38,9 +46,13 @@ function Items() {
                       textShadow:
                         "0 0 10px white, 0 0 1px white, 0 0 1px white",
                     }}
-                    onClick={() =>
-                      setLikedItems((prev) => ({ ...prev, [item.id]: false }))
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikedItems((prev) => ({
+                        ...prev,
+                        [item.id]: false,
+                      }));
+                    }}
                   />
                 ) : (
                   <FiHeart
@@ -49,13 +61,15 @@ function Items() {
                       textShadow:
                         "0 0 10px white, 0 0 1px white, 0 0 1px white",
                     }}
-                    onClick={() =>
-                      setLikedItems((prev) => ({ ...prev, [item.id]: true }))
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikedItems((prev) => ({
+                        ...prev,
+                        [item.id]: true,
+                      }));
+                    }}
                   />
                 )}
-              
-                
               </div>
             </div>
 
@@ -75,13 +89,11 @@ function Items() {
                 </div>
               </div>
               <div className="flex justify-around">
-                <div className="flex flex-col items-center text-[#f58021] gap-[-2px]">
-                  <div className="flex justify-center items-center">
-                    <div className="font-bold"> $</div>
-                    <del className="">
-                      <div className="text-sl text-[#f58021] my-[-5px] font-bold">
-                        {item?.caloriesPerServing}
-                      </div>
+                <div className="flex flex-col items-center text-[#f58021]">
+                  <div className="flex justify-center items-center font-bold">
+                    <div className="mr-1">$</div>
+                    <del className="text-sl text-[#f58021]">
+                      {item?.caloriesPerServing}
                     </del>
                   </div>
                   <div className="flex items-center text-[#f58021] font-bold text-xl">
@@ -89,8 +101,7 @@ function Items() {
                     <div>{item?.userId}</div>
                   </div>
                 </div>
-
-                <button className="cursor-pointer bg-[#f58021] w-40  hover:bg-[#e07115] text-white font-semibold text-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300">
+                <button className="cursor-pointer bg-[#f58021] w-40 hover:bg-[#e07115] text-white font-semibold text-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300">
                   Add to cart
                 </button>
               </div>
@@ -98,6 +109,13 @@ function Items() {
           </div>
         ))}
       </div>
+
+      {/* Product Modal Overlay */}
+      {showModal && selectedData && (
+        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center px-4 py-8">
+          <Productinfo data={selectedData} setShowmodel={setShowModal} />
+        </div>
+      )}
     </div>
   );
 }

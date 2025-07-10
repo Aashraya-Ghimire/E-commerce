@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
 
-import Items from "./items";
+import Items from "/items";
 const Popular = () => {
-  const [change, setChange]=useState(true);
-  const [title ,setTitle]=useState("See All");
-  const handleClick=()=>{
-    setChange(!change) 
-    if(change==true){
-      setTitle("See Less")
+  const [change, setChange] = useState(true);
+  const [title, setTitle] = useState("See All");
+  const handleClick = () => {
+    setChange(!change);
+    if (change == true) {
+      setTitle("See Less");
+    } else {
+      setTitle("See All");
     }
-    else{
-      setTitle("See All")
-    }
-  }
+  };
   return (
     <div>
       <div>
@@ -27,8 +26,10 @@ const Popular = () => {
             />
           </div>
         </div>
-       
-        <div className="h-80 overflow-scroll"><Items/></div>
+
+        <div className="h-80 overflow-scroll w-[50vw]">
+          <Items />
+        </div>
       </div>
     </div>
   );
