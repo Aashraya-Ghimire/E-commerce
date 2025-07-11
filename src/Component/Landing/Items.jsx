@@ -8,19 +8,30 @@ import productDataApi from "../Api/productData.api";
 import Productinfo from "../Product/Modal/Productinfo";
 
 function Items() {
-  const [likedItems, setLikedItems] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [cart, setCart] = useState({});
+
+  const [likedItems, setLikedItems] = useState({});
   const [productData, setProductData] = useState([]);
   const [selectedData, setSelectedData] = useState(null);
 
   useEffect(() => {
     productDataApi(setProductData);
-  }, []);
+  },[]);
 
   const openModal = (id) => {
     const selected = productData.find((item) => item.id === id);
     setSelectedData(selected);
     setShowModal(true);
+  };
+  const handleClick = (id) => {
+    setCart((prev) => ({
+      ...prev,
+      [id]:true,
+      
+    }
+ 
+  ));
   };
 
   return (
@@ -101,16 +112,26 @@ function Items() {
                     <div>{item?.userId}</div>
                   </div>
                 </div>
-                <button className="cursor-pointer bg-[#f58021] w-40 hover:bg-[#e07115] text-white font-semibold text-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300">
-                  Add to cart
-                </button>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClick(item.id);
+                       console.log("order is comming")
+                       localStorage.setItem("Cart", [JSON.stringify(item)]);
+                  }}
+                  title={cart[item.id] ? "Added to cart" : "Add to cart"}
+                  className={`cursor-pointer w-40 text-white font-semibold text-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300 ${
+                    cart[item.id]
+                      ? "bg-blue-500 hover:bg-blue-600"
+                      : "bg-[#f58021] hover:bg-[#e07115]"
+                  }`}
+                />
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Product Modal Overlay */}
       {showModal && selectedData && (
         <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center px-4 py-8">
           <Productinfo data={selectedData} setShowmodel={setShowModal} />
