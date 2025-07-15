@@ -1,12 +1,12 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import Hero from './Hero'
-import Categories from './Categories'
-import Product from '../Product/Product'
-import Footer from '../Footer/Footer'
+import React from "react";
+import Navbar from "../Navbar/Navbar";
+import Hero from "./Hero";
+import Categories from "./Categories";
+import Product from "../Product/Product";
+import Footer from "../Footer/Footer";
 
 const Landing = () => {
-    const data = [
+  const data = [
     {
       id: 1,
       name: "Classic Margherita Pizza",
@@ -42,13 +42,11 @@ const Landing = () => {
   ];
   return (
     <div>
-      <Navbar/>
-      <Hero/>
-      <Categories/>
-      <Product data={data}/>
-      <Footer/>
+      <Hero />
+      <Categories />
+      <Product data={data} />
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

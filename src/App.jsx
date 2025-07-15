@@ -1,13 +1,16 @@
-import React from 'react'
-import Landing from './Component/Landing/Landing'
+import { React, useEffect } from "react";
+import Landing from "./Component/Landing/Landing";
+import Navbar from "./Component/Navbar/Navbar";
+import Footer from "./Component/Footer/Footer";
 
-function App () {
-  
+function App() {
   return (
     <div className="bg-[#F7F7F7]">
-      <Landing/>
+      <Navbar />
+      <Landing />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

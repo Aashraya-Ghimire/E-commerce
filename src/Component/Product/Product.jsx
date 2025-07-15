@@ -4,7 +4,7 @@ import { useState } from "react";
 import Items from "../Landing/Items";
 
 const Product = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   const [change, setChange] = useState(true);
   const [title, setTitle] = useState("See All");
   const handleClick = () => {

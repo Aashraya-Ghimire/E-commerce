@@ -19,7 +19,7 @@ function Productinfo({ data, setShowmodel }) {
           className="w-full h-full object-cover"
         />
         <button
-          className="h-8 w-8 absolute top-2 left-2 z-10 bg-[#fa7516] rounded-[50%] text-3xl text-white box-border" 
+          className="h-8 w-8 absolute top-2 left-2 z-10 bg-[#fa7516] rounded-[50%] text-3xl text-white box-border"
           onClick={() => setShowmodel(false)}
         >
           <IoIosArrowBack />
@@ -42,6 +42,36 @@ function Productinfo({ data, setShowmodel }) {
             </div>
           </div>
         </div>
+
+        <div className="flex items-center justify-between text-sm text-gray-600 mt-2 mb-4">
+          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+            <span className="font-semibold text-gray-700">⏱</span>
+            <span>{data?.cookTimeMinutes} min</span>
+          </div>
+          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+            <span className="font-semibold text-gray-700">🍽</span>
+            <span>{data?.servings || data?.service} servings</span>
+          </div>
+          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+            <span className="font-semibold text-gray-700">🔥</span>
+            <span className="capitalize">{data?.difficulty}</span>
+          </div>
+        </div>
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold text-gray-700 mb-1">
+            Ingredients
+          </h3>
+          <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+            {Array.isArray(data?.ingredients) ? (
+              data.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))
+            ) : (
+              <li>{data?.ingredients}</li>
+            )}
+          </ul>
+        </div>
+
         <div className="flex justify-between items-center mt-4">
           <span className="text-2xl font-extrabold text-[#fa7516]">
             ${data?.caloriesPerServing}

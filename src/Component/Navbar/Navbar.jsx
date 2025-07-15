@@ -3,9 +3,11 @@ import { GrSearch } from "react-icons/gr";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import Button from "../Button/Button";
+import { NavLink, useNavigate } from "react-router";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="w-full shadow-md px-4 sm:px-8 md:px-12 bg-white z-50 fixed top-0">
@@ -18,15 +20,10 @@ function Navbar() {
           />
         </div>
         <div className="hidden md:flex gap-8 text-gray-700 font-medium text-sm">
-          {["Home", "Menu", "About", "Contact"].map((item, i) => (
-            <a
-              key={i}
-              href="#"
-              className="hover:text-[#f58021] transition duration-200 cursor-pointer"
-            >
-              {item}
-            </a>
-          ))}
+          <NavLink to="/" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Home</NavLink>
+          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Menu</NavLink>
+          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">About</NavLink>
+          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Contact</NavLink>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-full flex md:hidden items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5 text-black">
@@ -49,8 +46,13 @@ function Navbar() {
               <GrSearch size={18} />
             </button>
           </div>
-          <button className="text-gray-700 hover:text-black transition cursor-pointer">
-           <div className="relative"> <FaCartShopping size={20} /><span className="absolute bg-blue-700 rounded-[50%] text-white h-4 w-4 flex justify-center items-center bottom-3 left-3 text-[13px]">0</span></div> 
+          <button className="text-gray-700 hover:text-black transition cursor-pointer" onClick={()=>navigate("/cart")}>
+            <div className="relative" >
+              <FaCartShopping size={20} />
+              <span className="absolute bg-blue-700 rounded-[50%] text-white h-4 w-4 flex justify-center items-center bottom-3 left-3 text-[13px]">
+                0
+              </span>
+            </div>
           </button>
           <div className="w-24 hidden sm:block">
             <Button

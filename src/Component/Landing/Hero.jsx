@@ -4,7 +4,13 @@ function Hero() {
   return (
     <div>
       <div className="mt-22 sm:px-6 md:px-6 lg:px-24 xl:px-32">
-        <div className="bg-[url('/Hero.jpg')] h-[90vh] bg-cover bg-center rounded-3xl flex flex-col justify-center gap-6 px-4 sm:px-6 md:px-16 lg:px-20 opacity-90 bg-black">
+<div
+  className="h-[90vh] bg-cover bg-center rounded-3xl flex flex-col justify-center gap-6 px-4 sm:px-6 md:px-16 lg:px-20 opacity-90 bg-black"
+  style={{
+    backgroundImage: "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/Hero.jpg')",
+  }}
+>
+
           <div
             className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold"
             style={{
@@ -12,8 +18,8 @@ function Hero() {
             }}
           >
             <h1>Order Your</h1>
-            <h1>favorite food here</h1>
           </div>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-gradient-to-r from-yellow-300 to-orange-500 bg-clip-text">favorite food here</h1>
 
           <div
             className="text-white text-medium sm:text-lg md:text-xl font-medium max-w-[60%]"
