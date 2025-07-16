@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar";
 import Hero from "./Hero";
 import Categories from "./Categories";
-import Product from "../Product/Product";
-import Footer from "../Footer/Footer";
+import Product from "../../Product/Product";
+import Footer from "../../Footer/Footer";
 
 const Landing = () => {
   const data = [

@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/Button";
 import { useState } from "react";
-import Items from "../Landing/Items";
+import Items from "../pages/home/Items";
 
 const Product = ({ data }) => {
   // console.log(data);
@@ -30,7 +30,7 @@ const Product = ({ data }) => {
         </div>
 
         <div>
-          <Items/>
+          <Items />
         </div>
       </div>
     </div>

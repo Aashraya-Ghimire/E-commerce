@@ -39,14 +39,14 @@ const CartCard = ({ item, setDta }) => {
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={handleDecrease}
-                className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg font-bold"
+                className="cursor-pointer w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg font-bold"
               >
                 -
               </button>
               <span className="text-lg font-semibold">{quantity}</span>
               <button
                 onClick={handleIncrease}
-                className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg font-bold"
+                className="cursor-pointer w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg font-bold"
               >
                 +
               </button>
@@ -58,7 +58,7 @@ const CartCard = ({ item, setDta }) => {
               </div>
               <button
                 onClick={() => removeFromCart(item, setDta)}
-                className="text-red-500 hover:text-red-600 transition"
+                className="cursor-pointer text-red-500 hover:text-red-600 transition"
               >
                 <FiTrash2 size={20} />
               </button>

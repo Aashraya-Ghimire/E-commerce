@@ -1,11 +1,9 @@
 import React from "react";
-import Items from "../../Landing/Items";
-import { useState } from "react";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
-import { GrFavorite } from "react-icons/gr";
+
 function Productinfo({ data, setShowmodel }) {
   return (
     <div
@@ -19,20 +17,22 @@ function Productinfo({ data, setShowmodel }) {
           className="w-full h-full object-cover"
         />
         <button
-          className="h-8 w-8 absolute top-2 left-2 z-10 bg-[#fa7516] rounded-[50%] text-3xl text-white box-border"
+          className="h-8 w-8 absolute top-2 left-2 z-10 bg-[#fa7516] rounded-full text-white text-xl flex items-center justify-center"
           onClick={() => setShowmodel(false)}
         >
           <IoIosArrowBack />
         </button>
       </div>
-      <div className="w-full md:w-1/2 p-6 flex flex-col justify-between">
+
+      <div className="w-full md:w-1/2 p-4 flex flex-col justify-between">
         <div>
-          <div className="text-sm text-gray-400 uppercase tracking-widest mb-2 text-center md:text-left">
+          <div className="text-sm text-gray-400 uppercase tracking-widest mb-1 text-center md:text-left">
             {data?.mealType}
           </div>
-          <div className="flex justify-between items-start gap-2 mb-4">
-            <h2 className="text-xl font-bold text-gray-800">{data?.name}</h2>
-            <div className="flex gap-[2px] text-yellow-400 text-lg">
+
+          <div className="flex justify-between items-start gap-1 mb-3">
+            <h2 className="text-lg font-bold text-gray-800">{data?.name}</h2>
+            <div className="flex gap-[2px] text-yellow-400 text-base">
               {[...Array(Math.floor(data?.rating) || 0)].map((_, idx) => (
                 <MdOutlineStarPurple500 key={idx} />
               ))}
@@ -41,27 +41,47 @@ function Productinfo({ data, setShowmodel }) {
               ))}
             </div>
           </div>
+
+          {data?.cuisine && (
+            <div className="text-sm text-gray-600 mb-1">
+              <span className="font-semibold">Cuisine:</span> {data.cuisine}
+            </div>
+          )}
+
+          {Array.isArray(data?.tags) && data.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 mb-3">
+              {data.tags.map((tag, idx) => (
+                <span
+                  key={idx}
+                  className="bg-orange-100 text-orange-600 text-xs px-3 py-[2px] rounded-full font-medium"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="flex items-center justify-between text-sm text-gray-600 mt-2 mb-4">
-          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+        <div className="flex items-center justify-between text-xs text-gray-600 mb-3">
+          <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
             <span className="font-semibold text-gray-700">⏱</span>
             <span>{data?.cookTimeMinutes} min</span>
           </div>
-          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+          <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
             <span className="font-semibold text-gray-700">🍽</span>
             <span>{data?.servings || data?.service} servings</span>
           </div>
-          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg">
+          <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
             <span className="font-semibold text-gray-700">🔥</span>
             <span className="capitalize">{data?.difficulty}</span>
           </div>
         </div>
-        <div className="mt-4">
-          <h3 className="text-lg font-semibold text-gray-700 mb-1">
+
+        <div className="mt-2">
+          <h3 className="text-sm font-semibold text-gray-700 mb-1">
             Ingredients
           </h3>
-          <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+          <ul className="list-disc list-inside text-sm text-gray-600 space-y-[2px]">
             {Array.isArray(data?.ingredients) ? (
               data.ingredients.map((ingredient, index) => (
                 <li key={index}>{ingredient}</li>
@@ -72,8 +92,8 @@ function Productinfo({ data, setShowmodel }) {
           </ul>
         </div>
 
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-2xl font-extrabold text-[#fa7516]">
+        <div className="flex justify-between items-center mt-3">
+          <span className="text-xl font-extrabold text-[#fa7516]">
             ${data?.caloriesPerServing}
           </span>
           <button
