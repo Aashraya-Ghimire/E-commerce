@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import CartCard from "./CartCard";
 import { NavLink } from "react-router";
-import { DiVim } from "react-icons/di";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaShoppingBag } from "react-icons/fa";
@@ -10,7 +9,10 @@ import { FaShoppingBag } from "react-icons/fa";
 import Footer from "../Footer/Footer";
 
 function Cart() {
-  const [dta, setDta] = useState([]);
+  let data = localStorage.getItem("cart");
+  // const [cartData, setCartData] = useState(JSON.parse(data));
+
+  const [dta, setDta] = useState(JSON.parse(data));
   useEffect(() => {
     setDta(JSON.parse(localStorage.getItem("cart")));
   }, []);
@@ -38,7 +40,7 @@ function Cart() {
               </div>
 
               {dta.map((item, index) => (
-                <CartCard item={item} key={index} />
+                <CartCard item={item} key={index} setDta={setDta} />
               ))}
 
               <div className="border-t px-6 py-5 bg-gray-50">

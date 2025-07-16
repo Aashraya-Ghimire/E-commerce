@@ -4,18 +4,11 @@ import { IoStarOutline } from "react-icons/io5";
 import { FiTrash2 } from "react-icons/fi";
 import removeFromCart from "../Local/removeFromCart";
 
-const CartCard = ({ item }) => {
+const CartCard = ({ item, setDta }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrease = () => setQuantity((q) => q + 1);
   const handleDecrease = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-
-  // const handleRemove = () => {
-  //   const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-  //   const updatedCart = storedCart.filter((cartItem) => cartItem.id !== item.id);
-  //   localStorage.setItem("cart", JSON.stringify(updatedCart));
-  //   if (onItemRemoved) onItemRemoved(item.id);
-  // };
 
   return (
     <div className="flex justify-center px-4 py-4">
@@ -48,7 +41,7 @@ const CartCard = ({ item }) => {
                 onClick={handleDecrease}
                 className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg font-bold"
               >
-                −
+                -
               </button>
               <span className="text-lg font-semibold">{quantity}</span>
               <button
@@ -64,7 +57,7 @@ const CartCard = ({ item }) => {
                 ${quantity * item?.caloriesPerServing}
               </div>
               <button
-                onClick={() => removeFromCart(item)}
+                onClick={() => removeFromCart(item, setDta)}
                 className="text-red-500 hover:text-red-600 transition"
               >
                 <FiTrash2 size={20} />
