@@ -23,7 +23,6 @@ const Card = ({ item }) => {
         onClick={() => setShowModal(true)}
         className="w-72 h-[300px] rounded-3xl shadow-xl bg-white bg-opacity-80 backdrop-blur-md border border-gray-100 hover:shadow-2xl transition-transform duration-300 transform hover:scale-[1.025] cursor-pointer flex flex-col overflow-hidden"
       >
-        {/* Image */}
         <div className="relative h-36 overflow-hidden">
           <img
             src={item?.image}
@@ -59,7 +58,6 @@ const Card = ({ item }) => {
           </div>
         </div>
 
-        {/* Info */}
         <div className="flex flex-col justify-between flex-grow p-4">
           <div className="text-[11px] text-center text-gray-500 tracking-wide uppercase">
             {item?.mealType}
