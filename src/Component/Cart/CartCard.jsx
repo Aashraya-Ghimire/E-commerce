@@ -8,12 +8,10 @@ import Quantity from "./Quantity";
 const CartCard = ({ item, setDta }) => {
   const starsFilled = Math.floor(item?.rating || 0);
   const starsEmpty = 5 - starsFilled;
-
   return (
     <div className="flex justify-center px-2 py-1 bg-gray-100 ">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-md p-3 transition hover:shadow-lg">
-        <div className="flex flex-col sm:flex-row items-center sm:items-start">
-          {/* Image Section */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
           <div className="w-24 h-24 rounded-lg overflow-hidden shadow">
             <img
               src={item?.image}
@@ -21,10 +19,7 @@ const CartCard = ({ item, setDta }) => {
               className="w-full h-full object-cover"
             />
           </div>
-
-          {/* Info & Quantity Section */}
           <div className="flex-1 grid sm:grid-cols-4 gap-4 w-full items-center">
-            {/* Title & Rating */}
             <div className="col-span-2">
               <h2 className="text-lg font-bold text-gray-800 truncate">
                 {item?.name}
@@ -39,13 +34,9 @@ const CartCard = ({ item, setDta }) => {
                 ))}
               </div>
             </div>
-
-            {/* Quantity */}
             <div>
               <Quantity item={item} quantity={item?.quantity} setDta={setDta} />
             </div>
-
-            {/* Price & Remove */}
             <div className="flex flex-col items-center justify-center gap-2">
               <div className="text-xl font-bold text-orange-500">
                 ${Number(item?.caloriesPerServing || 0).toFixed(2)}

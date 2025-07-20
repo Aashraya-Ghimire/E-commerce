@@ -1,42 +1,72 @@
-// import React from "react";
+import React, { useState } from "react";
+import totalAmount from "../CustomFunction/totalAmount";
+import Ordersuccess from "./Ordersuccess";
+import OrangeButton from "../Button/OrangeButton";
 
-// function CheckOutModal({ visible, setVisible }) {
-//   return (
-//     <div
-//       className={`${visible ? " flex " : " hidden "}fixed inset-0 bg-red-500`}
-//       onClick={() => setVisible(false)}
-//     >
-//       <div className="mt-15">order successful</div>
-//     </div>
-//   );
-// }
+function CheckOutModal({ visible, setVisible, dta }) {
+  const [success, setSuccess] = useState(false);
 
-// export default CheckOutModal;
-
-import React from "react";
-import { IoCheckmarkCircle } from "react-icons/io5";
-
-function CheckOutModal({ visible, setVisible }) {
-  if (!visible) return null;
+  const handleNext = () => {
+    setVisible(false);
+    setSuccess(true);
+  };
 
   return (
-    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm text-center animate-fadeIn">
-        <div className="flex flex-col items-center gap-4">
-          <IoCheckmarkCircle className="text-green-500 text-5xl" />
-          <h2 className="text-2xl font-bold text-gray-800">Order Successful</h2>
-          <p className="text-gray-500">
-            Thank you for your purchase! Your order has been placed.
-          </p>
-          <button
-            onClick={() => setVisible(false)}
-            className="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full transition"
-          >
-            Close
-          </button>
+    <>
+      <div
+        className={`${
+          visible ? "flex" : "hidden"
+        } fixed inset-0 z-50 items-center justify-center bg-opacity-40 backdrop-blur-sm`}
+      >
+        <div className="w-[90%] max-w-lg max-h-[80vh] p-6 rounded-2xl bg-white shadow-2xl flex flex-col relative">
+          <div className="text-center font-bold text-2xl text-orange-500 mb-4">
+            Checkout
+          </div>
+
+          <div className="flex justify-between px-3 text-gray-500 text-sm font-medium border-b pb-2">
+            <span className="w-1/2">Item</span>
+            <span className="w-1/4 text-center">Qty</span>
+            <span className="w-1/4 text-right">Price</span>
+          </div>
+
+          <div className="overflow-auto flex-grow py-2 space-y-3">
+            {dta.map((item) => (
+              <div
+                key={item.id}
+                className="flex justify-between items-center bg-gray-50 px-3 py-2 rounded-md"
+              >
+                <div className="w-1/2 text-gray-800 font-medium truncate">
+                  {item.name}
+                </div>
+                <div className="w-1/4 text-center text-gray-600">
+                  x{item.quantity}
+                </div>
+                <div className="w-1/4 text-right font-semibold text-gray-700">
+                  ${item.caloriesPerServing}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <div className="flex justify-between items-center border-t pt-4 mt-4 text-lg font-semibold">
+              <div>Total:</div>
+              <div>${totalAmount(dta)}</div>
+            </div>
+            <div className="flex justify-between mt-6">
+              <button
+                className="px-4 py-2 rounded-md bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 transition cursor-pointer"
+                onClick={() => setVisible(false)}
+              >
+                Cancel
+              </button>
+              <OrangeButton title="Next" onClick={handleNext} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <Ordersuccess success={success} setSuccess={setSuccess} />
+    </>
   );
 }
 

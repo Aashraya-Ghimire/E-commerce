@@ -41,7 +41,6 @@ function Cart() {
             </NavLink>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -49,10 +48,8 @@ function Cart() {
   return (
     <div className="bg-gray-100 h-[100vh]">
       <Navbar />
-
       <div className="flex justify-center px-4 pt-20">
         <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
-          {/* Header */}
           <div className="h-20 bg-orange-500 flex flex-col sm:flex-row justify-between items-center px-6 py-5 text-white rounded-t-2xl">
             <div className="text-center sm:text-left">
               <div className="text-2xl font-bold">Your Cart</div>
@@ -65,21 +62,16 @@ function Cart() {
               Continue Shopping
             </NavLink>
           </div>
-
-          {/* Cart Items */}
           <div className="max-h-[55vh] overflow-y-auto">
             {dta.map((item, index) => (
               <CartCard item={item} key={index} setDta={setDta} />
             ))}
           </div>
-
-          {/* Bottom Total Bar */}
           <div className="px-6 py-5 bg-gray-50">
             <div className="flex justify-between items-center text-lg font-semibold text-gray-700 mb-4">
               <div>Total</div>
               <div className="text-orange-500 text-xl">${totalAmount(dta)}</div>
             </div>
-
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
               <button
                 onClick={() => {
@@ -91,14 +83,12 @@ function Cart() {
                 <MdDeleteOutline className="text-xl" />
                 Clear Cart
               </button>
-
               <OrangeButton title="Checkout" onClick={() => setVisible(true)} />
             </div>
           </div>
         </div>
       </div>
-
-      <CheckOutModal visible={visible} setVisible={setVisible} />
+      <CheckOutModal visible={visible} setVisible={setVisible} dta={dta} />
     </div>
   );
 }
