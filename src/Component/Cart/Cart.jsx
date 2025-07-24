@@ -4,7 +4,7 @@ import CartCard from "./CartCard";
 import { NavLink } from "react-router";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
-import Footer from "../Footer/Footer";
+// import Footer from "../Footer/Footer";
 import OrangeButton from "../Button/OrangeButton";
 import totalAmount from "../CustomFunction/totalAmount";
 import CheckOutModal from "./CheckOutModal";

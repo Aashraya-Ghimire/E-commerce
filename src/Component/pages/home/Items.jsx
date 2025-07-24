@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import productDataApi from "../../Api/productData.api";
+// import productDataApi from "../../Api/productData.api";
 // import Productinfo from "../../Product/Modal/Productinfo";
 // import addToCart from "../../Local/addToCart";
 import Card from "../../Product/Card/Card";
 
-function Items() {
-  const [cart, setCart] = useState({});
-
-  // const [likedItems, setLikedItems] = useState({});
-  const [productData, setProductData] = useState([]);
-
-  useEffect(() => {
-    productDataApi(setProductData);
-  }, []);
-
+function Items({ productData }) {
   const handleClick = (id) => {
     setCart((prev) => ({
       ...prev,

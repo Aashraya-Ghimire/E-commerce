@@ -2,28 +2,50 @@ import React, { useState } from "react";
 import { GrSearch } from "react-icons/gr";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
-import Button from "../Button/Button";
 import { NavLink, useNavigate } from "react-router";
+import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <div className="w-full shadow-md px-4 sm:px-8 md:px-12 bg-white z-50 fixed top-0">
+    <div className="w-[98.5vw] shadow-md px-4 sm:px-6 md:px-12 bg-white z-50 fixed top-0">
       <div className="flex justify-between items-center h-[70px]">
         <div className="w-16">
-          <img
-            src="/logo.png"
-            alt="Logo"
-            className="w-full h-auto object-contain"
-          />
+          <NavLink to="/">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="w-[100%] h-auto object-contain cursor-pointer"
+            />
+          </NavLink>
         </div>
         <div className="hidden md:flex gap-8 text-gray-700 font-medium text-sm">
-          <NavLink to="/" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Home</NavLink>
-          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Menu</NavLink>
-          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">About</NavLink>
-          <NavLink to="" className="hover:text-[#f58021] transition duration-200 cursor-pointer">Contact</NavLink>
+          <NavLink
+            to="/"
+            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to=""
+            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+          >
+            Menu
+          </NavLink>
+          <NavLink
+            to=""
+            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+          >
+            About
+          </NavLink>
+          <NavLink
+            to=""
+            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+          >
+            Contact
+          </NavLink>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-full flex md:hidden items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5 text-black">
@@ -46,25 +68,22 @@ function Navbar() {
               <GrSearch size={18} />
             </button>
           </div>
-          <button className="text-gray-700 hover:text-black transition cursor-pointer" onClick={()=>navigate("/cart")}>
-            <div className="relative" >
+          <button
+            className="text-gray-700 hover:text-black transition cursor-pointer"
+            onClick={() => navigate("/cart")}
+          >
+            <div className="relative">
               <FaCartShopping size={20} />
               <span className="absolute bg-blue-700 rounded-[50%] text-white h-4 w-4 flex justify-center items-center bottom-3 left-3 text-[13px]">
                 0
               </span>
             </div>
           </button>
-          <div className="w-24 hidden sm:block">
-            <Button
-              className="cursor-pointer text-center w-20 px-4 py-1.5 rounded-xl bg-[#f58021] hover:bg-[#e07115] text-white text-sm transition"
-              title={"Sign In"}
-            />
-          </div>
           <button
             className="block md:hidden text-2xl text-gray-700"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {menuOpen ? <HiX /> : <HiOutlineMenuAlt3 />}
+            {menuOpen ? <HiX /> : <PiDotsThreeOutlineVerticalFill />}
           </button>
         </div>
       </div>
@@ -90,18 +109,13 @@ function Navbar() {
           {["Home", "Menu", "About", "Contact"].map((item, i) => (
             <a
               key={i}
-              href="#"
+              href={item === "Home" ? "/" : "#"}
               className="py-1 border-b border-gray-100 hover:text-[#f58021] transition"
             >
               {item}
             </a>
           ))}
-          <div className="w-full mt-4">
-            <Button
-              className="cursor-pointer w-fit px-4 py-2 rounded-xl bg-[#f58021] hover:bg-[#e07115] text-white text-sm transition"
-              title={"Sign In"}
-            />
-          </div>
+          <div className="w-full mt-4"></div>
         </div>
       </div>
     </div>

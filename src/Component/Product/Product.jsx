@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import { useState } from "react";
 import Items from "../pages/home/Items";
 
-const Product = ({ data }) => {
+const Product = ({ data, productData }) => {
   // console.log(data);
   const [change, setChange] = useState(true);
   const [title, setTitle] = useState("See All");
@@ -30,7 +30,7 @@ const Product = ({ data }) => {
         </div>
 
         <div>
-          <Items />
+          <Items productData={productData} />
         </div>
       </div>
     </div>

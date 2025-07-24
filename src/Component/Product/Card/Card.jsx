@@ -59,7 +59,7 @@ const Card = ({ item }) => {
         </div>
 
         <div className="flex flex-col justify-between flex-grow p-4">
-          <div className="text-[11px] text-center text-gray-500 tracking-wide uppercase">
+          <div className="text-[11px] text-center text-gray-500 tracking-wide">
             {item?.mealType}
           </div>
 

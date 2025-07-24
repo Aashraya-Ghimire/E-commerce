@@ -43,8 +43,6 @@ const Landing = () => {
   return (
     <div>
       <Hero />
-      <Categories />
-      <Product data={data} />
     </div>
   );
 };

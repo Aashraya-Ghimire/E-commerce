@@ -1,15 +1,24 @@
 import React from "react";
 
-function Categories() {
+function Categories({ maindata, setProductData }) {
   const categories = [
     { label: "All", img: "/all.jpg" },
-    { label: "Fruits & Veggies", img: "/fruits.png" },
-    { label: "Dairy", img: "/dairy.png" },
-    { label: "Sweets & Snacks", img: "/snacks.png" },
-    { label: "Drinks", img: "/drinks.png" },
-    { label: "Ready Meals", img: "/fast.png" },
+    { label: "Dinner", img: "/fruits.png" },
+    { label: "Lunch", img: "/dairy.png" },
+    { label: "Snack", img: "/snacks.png" },
+    { label: "Breakfast", img: "/drinks.png" },
+    { label: "Beverage", img: "/fast.png" },
   ];
-
+  const sort = (name) => {
+    let temp = maindata.filter(
+      (item) => item.mealType[0].toLowerCase() == name.toLowerCase()
+    );
+    setProductData(temp);
+    if (name == "All") {
+      setProductData(maindata);
+    }
+    console.log(temp);
+  };
   return (
     <div>
       <div className="mx-[10%] my-5 text-2xl font-bold">Categories</div>
@@ -18,6 +27,7 @@ function Categories() {
         {categories.map((cat, i) => (
           <div
             key={i}
+            onClick={() => sort(cat.label)}
             className="flex flex-col items-center w-24 sm:w-28 md:w-32"
           >
             <div
