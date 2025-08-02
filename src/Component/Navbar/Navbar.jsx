@@ -8,77 +8,96 @@ import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    alert("Logout successful");
+    navigate("/auth");
+  };
 
   return (
-    <div className="w-[98.5vw] shadow-md px-4 sm:px-6 md:px-12 bg-white z-50 fixed top-0">
+    <div className="w-full shadow-md px-4 sm:px-6 md:px-12 bg-white z-50 fixed top-0">
+      {/* Top bar */}
       <div className="flex justify-between items-center h-[70px]">
-        <div className="w-16">
+        {/* Logo */}
+        <div className="w-16 flex-shrink-0">
           <NavLink to="/">
             <img
               src="/logo.png"
               alt="Logo"
-              className="w-[100%] h-auto object-contain cursor-pointer"
+              className="w-full h-auto object-contain cursor-pointer"
             />
           </NavLink>
         </div>
+
+        {/* Navigation links (hidden on mobile) */}
         <div className="hidden md:flex gap-8 text-gray-700 font-medium text-sm">
           <NavLink
             to="/"
-            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+            className="hover:text-[#f58021] transition duration-200"
           >
             Home
           </NavLink>
           <NavLink
-            to=""
-            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+            to="#"
+            className="hover:text-[#f58021] transition duration-200"
           >
             Menu
           </NavLink>
           <NavLink
-            to=""
-            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+            to="#"
+            className="hover:text-[#f58021] transition duration-200"
           >
             About
           </NavLink>
           <NavLink
-            to=""
-            className="hover:text-[#f58021] transition duration-200 cursor-pointer"
+            to="#"
+            className="hover:text-[#f58021] transition duration-200"
           >
             Contact
           </NavLink>
         </div>
+
+        {/* Right icons */}
         <div className="flex items-center gap-4">
-          <div className="w-full flex md:hidden items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5 text-black">
+          {/* Mobile search */}
+          <div className="flex md:hidden items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5">
             <input
               type="text"
               placeholder="Search"
-              className="outline-none bg-transparent text-sm placeholder-gray-600 sm:w-32"
+              className="outline-none bg-transparent text-sm placeholder-gray-600 w-35 sm:w-30"
             />
-            <button className="pl-2 text-gray-700 hover:text-black cursor-pointer">
+            <button className="pl-2 text-gray-700 hover:text-black">
               <GrSearch size={18} />
             </button>
           </div>
-          <div className="hidden md:flex items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5 text-black">
+
+          {/* Desktop search */}
+          <div className="hidden md:flex items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5">
             <input
               type="text"
               placeholder="Search"
-              className="outline-none w-30 bg-transparent text-sm placeholder-gray-600 sm:w-32"
+              className="outline-none bg-transparent text-sm placeholder-gray-600 w-32"
             />
-            <button className="pl-2 text-gray-700 hover:text-black cursor-pointer">
+            <button className="pl-2 text-gray-700 hover:text-black">
               <GrSearch size={18} />
             </button>
           </div>
+
+          {/* Cart icon */}
           <button
-            className="text-gray-700 hover:text-black transition cursor-pointer"
+            className="relative text-gray-700 hover:text-black transition"
             onClick={() => navigate("/cart")}
           >
-            <div className="relative">
-              <FaCartShopping size={20} />
-              <span className="absolute bg-blue-700 rounded-[50%] text-white h-4 w-4 flex justify-center items-center bottom-3 left-3 text-[13px]">
-                0
-              </span>
-            </div>
+            <FaCartShopping size={20} />
+            <span className="absolute bg-blue-700 text-white text-[13px] h-4 w-4 flex items-center justify-center rounded-full -top-2 -right-2">
+              0
+            </span>
           </button>
+          <div>
+            <button onClick={() => handleLogout()}>logout</button>
+          </div>
+
+          {/* Mobile menu toggle */}
           <button
             className="block md:hidden text-2xl text-gray-700"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -87,15 +106,19 @@ function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Overlay */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
           onClick={() => setMenuOpen(false)}
         />
       )}
+
+      {/* Mobile menu */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[80%] sm:w-[60%] bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out
-        ${menuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
+        className={`fixed top-0 right-0 h-screen w-[80%] sm:w-[60%] bg-white z-50 shadow-lg transition-transform duration-300 ease-in-out
+          ${menuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
       >
         <div className="flex justify-end p-4">
           <button
@@ -107,13 +130,14 @@ function Navbar() {
         </div>
         <div className="flex flex-col gap-4 px-6 text-gray-700 font-medium text-sm">
           {["Home", "Menu", "About", "Contact"].map((item, i) => (
-            <a
+            <NavLink
               key={i}
-              href={item === "Home" ? "/" : "#"}
+              to={item === "Home" ? "/" : "#"}
+              onClick={() => setMenuOpen(false)}
               className="py-1 border-b border-gray-100 hover:text-[#f58021] transition"
             >
               {item}
-            </a>
+            </NavLink>
           ))}
           <div className="w-full mt-4"></div>
         </div>

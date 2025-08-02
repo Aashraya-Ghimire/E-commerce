@@ -5,10 +5,15 @@ import Landing from "./Component/pages/home/Landing";
 import productDataApi from "./Component/Api/productData.api";
 import Categories from "./Component/pages/home/Categories";
 import Product from "./Component/Product/Product";
+import { useNavigate } from "react-router";
 function App() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/auth");
+  }
   const [productData, setProductData] = useState([]);
   const [maindata, setMaindata] = useState([]);
-
   useEffect(() => {
     productDataApi(setProductData, setMaindata);
   }, []);
