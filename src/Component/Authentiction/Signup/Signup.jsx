@@ -4,7 +4,7 @@ import AddressUser from "./Component/AddressUser";
 import PasswordUser from "./Component/PasswordUser";
 
 const Signup = ({ setScreen }) => {
-  const [userDetails, setUserDetails] = useState({
+  const [userDetail, setUserDetail] = useState({
     userName: "",
     contactNumber: "",
     email: "",
@@ -16,31 +16,40 @@ const Signup = ({ setScreen }) => {
   const [stage, setStage] = useState(0);
   return (
     <div className="p-3">
-      <div className="text-2xl font-extrabold text-orange-500 text-center">
-        Signup
+      <div className="text-xl font-bold text-orange-500 text-center">
+        SignUp
       </div>
       <div>
         {stage == 0 && (
           <ContactUser
-            userDetails={userDetails}
-            setUserDetails={setUserDetails}
+            userDetail={userDetail}
+            setUserDetail={setUserDetail}
             setStage={setStage}
           />
         )}
         {stage == 1 && (
           <AddressUser
-            userDetails={userDetails}
-            setUserDetails={setUserDetails}
+            userDetail={userDetail}
+            setUserDetail={setUserDetail}
             setStage={setStage}
           />
         )}
         {stage == 2 && (
           <PasswordUser
-            userDetails={userDetails}
-            setUserDetails={setUserDetails}
+            userDetail={userDetail}
+            setUserDetail={setUserDetail}
             setStage={setStage}
           />
         )}
+      </div>
+      <div className="text-xs text-center font-medium text-gray-500 my-4">
+        Already have an account ?{" "}
+        <span
+          className="text-blue-500 cursor-pointer"
+          onClick={() => setScreen(false)}
+        >
+          Login
+        </span>
       </div>
     </div>
   );

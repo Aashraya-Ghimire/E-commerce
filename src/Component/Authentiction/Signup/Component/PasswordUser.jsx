@@ -4,12 +4,13 @@ import OrangeButton from "../../../Button/OrangeButton";
 import { useNavigate } from "react-router";
 import signupApi from "../../../Api/Auth/signupApi";
 
-const PasswordUser = ({ userDetails, setUserDetails, setStage }) => {
+const PasswordUser = ({ userDetail, setUserDetail, setStage }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(0);
   const errorMessageRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  // const typeRef=useRef();
 
   const handelSend = () => {
     if (
@@ -26,10 +27,10 @@ const PasswordUser = ({ userDetails, setUserDetails, setStage }) => {
       setError(2);
     } else {
       setError(0);
-      let tempUserDetail = userDetails;
-      console.log("hello", userDetails);
+      let tempUserDetail = userDetail;
+      console.log("hello", userDetail);
       tempUserDetail.password = passwordRef.current.value;
-      signupApi(tempUserDetail, navigate("/"), setStage, setUserDetails);
+      signupApi(tempUserDetail, navigate("/"), setStage, setUserDetail);
     }
   };
 
@@ -40,6 +41,7 @@ const PasswordUser = ({ userDetails, setUserDetails, setStage }) => {
         err={error == 1 && error}
         label={"Password"}
         placeholder={"Enter your Password"}
+        type={"password"}
         ref={passwordRef}
         errormessage={errorMessageRef.current}
       />
@@ -47,6 +49,7 @@ const PasswordUser = ({ userDetails, setUserDetails, setStage }) => {
         err={error == 2 && error}
         label={"Confirm Password"}
         placeholder={"Enter your Password Again"}
+        type={"password"}
         ref={confirmPasswordRef}
         errormessage={errorMessageRef.current}
       />

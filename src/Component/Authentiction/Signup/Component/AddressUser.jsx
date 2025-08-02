@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import TextInput from "../../../InputField/TextInput";
 import OrangeButton from "../../../Button/OrangeButton";
 
-const AddressUser = ({ userDetails, setUserDetails, setStage }) => {
+const AddressUser = ({ userDetail, setUserDetail, setStage }) => {
   const [error, setError] = useState(0);
   const errorMessageRef = useRef();
   const cityRef = useRef();
@@ -20,12 +20,12 @@ const AddressUser = ({ userDetails, setUserDetails, setStage }) => {
       setError(3);
     } else {
       setError(0);
-      console.log("user data", userDetails);
-      let tempUserDetail = userDetails;
+      console.log("user data", userDetail);
+      let tempUserDetail = userDetail;
       tempUserDetail.city = cityRef.current.value;
       tempUserDetail.street = streetRef.current.value;
       tempUserDetail.deliveryDescription = deliveryDescriptionRef.current.value;
-      setUserDetails(tempUserDetail);
+      setUserDetail(tempUserDetail);
       setStage(2);
     }
   };

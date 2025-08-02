@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import TextInput from "../../../InputField/TextInput";
 import OrangeButton from "../../../Button/OrangeButton";
 
-function ContactUser({ userDetails, setUserDetails, setStage }) {
+function ContactUser({ userDetails, setUserDetail, setStage }) {
   const [error, setError] = useState(0);
   const nameRef = useRef();
   const contactNumberRef = useRef();
@@ -29,10 +29,11 @@ function ContactUser({ userDetails, setUserDetails, setStage }) {
       setError(3);
     } else {
       setError(0);
-      setUserDetails({
+      setUserDetail({
         userName: nameRef.current.value,
         contactNumber: contactNumberRef.current.value,
         email: emailRef.current.value,
+
         password: "",
         city: "",
         street: "",
@@ -50,6 +51,7 @@ function ContactUser({ userDetails, setUserDetails, setStage }) {
         placeholder={"Enter your name"}
         ref={nameRef}
         errormessage={errorMessageRef.current}
+        type={"text"}
       />
       <TextInput
         err={error == 2 && true}
@@ -57,6 +59,7 @@ function ContactUser({ userDetails, setUserDetails, setStage }) {
         placeholder={"Enter your email"}
         ref={emailRef}
         errormessage={errorMessageRef.current}
+        type={"email"}
       />
       <TextInput
         err={error == 3 && true}
@@ -64,6 +67,7 @@ function ContactUser({ userDetails, setUserDetails, setStage }) {
         placeholder={"Enter your Contact Number"}
         ref={contactNumberRef}
         errormessage={errorMessageRef.current}
+        // type={"number"}
       />
       <div className="flex justify-center">
         <OrangeButton title={"Proceed"} onClick={() => handleData()} />

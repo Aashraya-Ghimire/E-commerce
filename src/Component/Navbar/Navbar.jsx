@@ -94,7 +94,12 @@ function Navbar() {
             </span>
           </button>
           <div>
-            <button onClick={() => handleLogout()}>logout</button>
+            <button
+              onClick={handleLogout}
+              className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium py-1.5 px-4 rounded-xl shadow-md transition duration-200"
+            >
+              Logout
+            </button>
           </div>
 
           {/* Mobile menu toggle */}

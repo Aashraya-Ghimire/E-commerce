@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-function TextInput({ label, placeholder, ref, err, errormessage }) {
+function TextInput({ label, placeholder, ref, err, errormessage, type }) {
   const inputref = useRef();
 
   return (
@@ -19,6 +19,7 @@ function TextInput({ label, placeholder, ref, err, errormessage }) {
           focus:outline-none focus:ring-1 bg-white`}
         placeholder={placeholder}
         ref={ref}
+        type={type}
       />
 
       <div className="h-5 mt-1 text-sm text-red-500 px-1">
